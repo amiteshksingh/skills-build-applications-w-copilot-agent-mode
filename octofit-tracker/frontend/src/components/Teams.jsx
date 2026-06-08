@@ -13,8 +13,10 @@ function Teams() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const codespaceEndpoint = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`;
-    const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    const inferredCodespace = window.location.hostname.match(/^(.*)-\d+\.app\.github\.dev$/)?.[1] || '';
+    const codespaceName = import.meta.env.VITE_CODESPACE_NAME || inferredCodespace;
+    const codespaceEndpoint = `https://${codespaceName}-8000.app.github.dev/api/teams/`;
+    const endpoint = codespaceName
       ? codespaceEndpoint
       : 'http://localhost:8000/api/teams/';
 

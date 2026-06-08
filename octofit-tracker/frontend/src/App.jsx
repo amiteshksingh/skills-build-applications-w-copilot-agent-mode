@@ -15,7 +15,8 @@ const links = [
 ];
 
 function App() {
-  const codeSpaceName = import.meta.env.VITE_CODESPACE_NAME;
+  const inferredCodespace = window.location.hostname.match(/^(.*)-\d+\.app\.github\.dev$/)?.[1] || '';
+  const codeSpaceName = import.meta.env.VITE_CODESPACE_NAME || inferredCodespace;
   const apiBaseUrl = codeSpaceName
     ? `https://${codeSpaceName}-8000.app.github.dev/api`
     : 'http://localhost:8000/api';
